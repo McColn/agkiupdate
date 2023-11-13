@@ -1,0 +1,606 @@
+{% extends 'app/base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+  /*--------------------------------------------------------------
+# Doctors
+--------------------------------------------------------------*/
+.doctors {
+  background: #fff;
+}
+
+.doctors .member {
+  position: relative;
+  box-shadow: 0px 2px 15px rgba(44, 73, 100, 0.08);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.doctors .member .pic {
+  overflow: hidden;
+  width: 180px;
+  border-radius: 50%;
+}
+
+.doctors .member .pic img {
+  transition: ease-in-out 0.3s;
+}
+
+.doctors .member:hover img {
+  transform: scale(1.1);
+}
+
+.doctors .member .member-info {
+  padding-left: 30px;
+}
+
+.doctors .member h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #2c4964;
+}
+
+.doctors .member span {
+  display: block;
+  font-size: 15px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 500;
+}
+
+.doctors .member span::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: #b2c8dd;
+  bottom: 0;
+  left: 0;
+}
+
+.doctors .member p {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+}
+
+.doctors .member .social {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.doctors .member .social a {
+  transition: ease-in-out 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 32px;
+  height: 32px;
+  background: #a0bcd5;
+}
+
+.doctors .member .social a i {
+  color: #fff;
+  font-size: 16px;
+  margin: 0 2px;
+}
+
+.doctors .member .social a:hover {
+  background: #1977cc;
+}
+
+.doctors .member .social a+a {
+  margin-left: 8px;
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  padding: 0 0 0 0;
+  background: linear-gradient(85deg, #392c70, #6a005b);
+/*   
+  background: linear-gradient(180deg, #213b52 0%, rgb(33, 60, 84) 35%, rgb(32, 69, 100) 100%); */
+}
+
+#hero h1 {
+  margin: 0 0 15px 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  color: #d2e0ed;
+  font-family: "Poppins", sans-serif;
+}
+
+#hero h2 {
+  color: #fff;
+  margin-bottom: 30px;
+  font-size: 22px;
+}
+
+#hero .btn-get-started {
+  color: #213b52;
+  border-radius: 50px;
+  padding: 8px 35px 10px 35px;
+  border: 2px solid #fdc134;
+  transition: all ease-in-out 0.3s;
+  display: inline-block;
+  background: #fdc134;
+}
+
+#hero .btn-get-started:hover {
+  background: transparent;
+  color: #fff;
+}
+footer {
+    background: linear-gradient(85deg, #392c70, #6a005b);
+}
+
+
+@media (max-width: 991px) {
+  #hero .hero-img {
+    text-align: center;
+  }
+
+  #hero .hero-img img {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  #hero {
+    -moz-text-align-last: center;
+    text-align-last: center;
+  }
+
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+
+  #hero .hero-img img {
+    width: 70%;
+  }
+}
+
+@media (max-width: 575px) {
+  #hero .hero-img img {
+    width: 80%;
+  }
+}
+
+
+</style>
+<div class="container mt-5">
+
+
+
+  {% if user.is_receptionist  or user.is_doctor or user.is_laboratorist or user.is_pharmacist %}
+    <!-- <div class="page-header">
+        <h3 class="page-title">
+          Dashboard
+        </h3>
+    </div> -->
+      <div class="row grid-margin">
+        <div class="col-12">
+          <div class="card card-statistics">
+            <div class="card-body">
+              <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                  <div class="statistics-item">
+                    <a class="nav-link" href="{% url 'userlist' %}" style="color:white;">
+                    <p>
+                      <i class="icon-sm fa fa-user mr-2"></i>
+                      Total users
+                    </p>
+                    <center><h2>{{registered_total}}</h2></center>
+                  </a>
+                  </div>
+                  <div class="statistics-item">
+                    <a class="nav-link" href="{% url 'sickinfolist' %}" style="color:white;">
+                    <p>
+                      
+                      <i class="icon-sm fas fa-stethoscope mr-2"></i>
+                      New far patient
+                    </p>
+                    <center> <h2>{{newsick_total}}</h2></center>
+                    </a>
+                  </div>
+                  <div class="statistics-item">
+                    <a class="nav-link" href="{% url 'registeredHosptal' %}" style="color:white;">
+                    <p>
+                      <i class="icon-sm fas fa-hospital mr-2"></i>
+                      Registered hospital
+                    </p>
+                    <center> <h2>{{hospital_total}}</h2></center>
+                  </a>
+                  </div>
+                  <div class="statistics-item">
+                    <a class="nav-link" href="{% url 'contact_list' %}" style="color:white;">
+                    <p>
+                      <i class="icon-sm fas fa-paper-plane mr-2"></i>
+                      New messages
+                    </p>
+                    <center> <h2>{{jumbe_total}}</h2></center>
+                  </a>
+                  </div>
+                  <div class="statistics-item">
+                    <p>
+                      <i class="icon-sm fas fa-medkit mr-2"></i>
+                      Today agki patient
+                    </p>
+                    <center> <h2>{{today_total_patients}}</h2></center>
+                   
+                  </div>
+                  <div class="statistics-item">
+                    <p>
+                      <i class="icon-sm fas fa-wheelchair mr-2"></i>
+                      Total agki patient
+                    </p>
+                    <center> <h2>{{overall_total_patients}}</h2></center>
+                   
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row grid-margin">
+      <div class="col-12">
+        <div class="card card-statistics">
+          <div class="card-body">
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                <div class="statistics-item">
+                  
+                  <p>
+                    <i class="icon-sm fa fa-user mr-2"></i>
+                    Day total cost
+                  </p>
+                  <center><h2>{{day_total_cost}}</h2></center>
+                
+                </div>
+                <div class="statistics-item">
+                  <p>
+                    
+                    <i class="icon-sm fas fa-stethoscope mr-2"></i>
+                    week_total_cost
+                  </p>
+                  <center> <h2>{{week_total_cost}}</h2></center>
+                  
+                </div>
+                <div class="statistics-item">
+                  <p>
+                    <i class="icon-sm fas fa-hospital mr-2"></i>
+                    month_total_cost
+                  </p>
+                  <center> <h2>{{month_total_cost}}</h2></center>
+                
+                </div>
+                <div class="statistics-item">
+                  <p>
+                    <i class="icon-sm fas fa-paper-plane mr-2"></i>
+                    year_total_cost
+                  </p>
+                  <center> <h2>{{year_total_cost}}</h2></center>
+                
+                </div>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+   {% endif %} 
+
+    
+  <!-- ======= Hero Section ======= -->
+<section id="hero">
+
+  <div class="container">
+    <div class="row d-flex align-items-center"">
+    <div class=" col-lg-6 py-5 py-lg-0 order-2 order-lg-1" data-aos="fade-right">
+      <h1>AGKI Dispencary center</h1>
+      <h2>"Karibu! Pahali Penye Huruma na Uangalifu wa Kipekee."</h2>
+      {% if user.is_authenticated %}
+      <a href="{% url 'sickinfo' %}" class="btn-get-started scrollto">Toa taarifa ya ugonjwa</a>
+      {% else %}
+      <a href="{% url 'signin' %}" class="btn-get-started scrollto">Jisajili kutoa taarifa</a>
+      {% endif %}
+    </div>
+    <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
+      <img src="{% static 'app/hero.png' %}" class="img-fluid" alt="">
+    </div>
+  </div>
+  </div>
+
+</section><!-- End Hero -->
+<br>
+      
+    
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card service-card">
+                <div class="card-body">
+                    <h5 class="card-title">Uchunguzi wa Kawaida</h5>
+                    <p class="card-text">Uchunguzi wa afya wa kawaida na mashauriano na madaktari wenye uzoefu.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card service-card">
+                <div class="card-body">
+                    <h5 class="card-title">Matibabu Maalum</h5>
+                    <p class="card-text">Matibabu maalum na upasuaji na wataalamu wa matibabu walio mahiri.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card service-card">
+                <div class="card-body">
+                    <h5 class="card-title">Huduma za Dharura</h5>
+                    <p class="card-text">Huduma za matibabu ya dharura 24/7 kwa huduma za matibabu ya haraka na muhimu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-md-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center mb-3 mb-md-0">
+                  <button class="btn btn-social-icon btn-facebook btn-rounded">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+                  <div class="ml-4">
+                    <h5 class="mb-0">Facebook</h5>
+                    <p class="mb-0">AGKI hospital</p>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mb-3 mb-md-0">
+                  <button class="btn btn-social-icon btn-twitter btn-rounded">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+                  <div class="ml-4">
+                    <h5 class="mb-0">Twitter</h5>
+                    <p class="mb-0">AGKI hospital</p>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mb-3 mb-md-0">
+                  <button class="btn btn-social-icon btn-google btn-rounded">
+                    <i class="fab fa-instagram"></i>
+                  </button>
+                  <div class="ml-4">
+                    <h5 class="mb-0">Instagram</h5>
+                    <p class="mb-0">AGKI hospital</p>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <button class="btn btn-social-icon btn-linkedin btn-rounded">
+                    <i class="fab fa-linkedin-in"></i>
+                  </button>
+                  <div class="ml-4">
+                    <h5 class="mb-0">Linkedin</h5>
+                    <p class="mb-0">AGKI hospital</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      
+
+      
+{% if user.is_receptionist  or user.is_doctor or user.is_laboratorist or user.is_pharmacist %}
+    
+       <!-- ======= Doctors Section ======= -->
+       <br>
+    <section id="doctors" class="doctors">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Staff</h2>
+          </div>
+
+        <div class="row">
+
+            {% for i in x %}
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic">
+                {% if i.image %}
+                <img src="{{ i.image.url }}" class="img-fluid" alt="">
+                {% else %}
+                <img src="{% static 'app/doctors/default.jpg' %}" class="img-fluid" alt="">
+                {% endif %}
+              </div>
+              <div class="member-info">
+                <br>
+                <br>
+                <br>
+                <h4>{{i.username}} {{i.lastname}}</h4>
+                <span>{{i.department.name}}</span>
+                
+                
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section><!-- End Doctors Section -->
+
+{% endif %}
+
+    <!-- ======= Contact Section ======= -->
+
+    <br>
+      <div class="card">
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+           </div>
+      </div>
+
+      <div>
+        <iframe style="border:0; width: 100%; height: 350px;" 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5164.308037170913!2d38.849879976077744!3d-6.742222165927443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c65a85df9799f%3A0xd8c21caaf535e5d8!2sKbh!5e1!3m2!1sen!2stz!4v1699008580826!5m2!1sen!2stz" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="container">
+        <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>A108 kongowe</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>info@agki.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+255 777 777 777</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form  method="POST">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="jina" class="form-control" placeholder="Jina lako" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="text" class="form-control" name="phone"  placeholder="Namba ya simu" required>
+                </div>
+              </div>
+              <!-- <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div> -->
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="ujumbe" rows="5" placeholder="ujumbe" required></textarea>
+              </div>
+              
+              <div class="text-center"><button type="submit" class="btn btn-primary">Send Message</button></div>
+            </form>
+            <br>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    
+    </section><!-- End Contact Section -->
+
+
+
+      <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 2023</span>
+          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+            Developer: M.O Cornel   
+            <a href="https://instagram.com/cornelmtavangu" style="color: #6a005b;">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://facebook.com/cornelmtavangujr"  style="color: #6a005b;">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/cornelmtavangu"  style="color: #6a005b;">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </span>
+        </div>
+      </footer>
+
+
+<footer class="text-light">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-3">
+                <h5>SERVICES</h5>
+                <ul class="list-unstyled">
+                    <li>upasuaji</li>
+                    <li>uzazi</li>
+                    <li>watoto</li>
+                    <li>wajawazito</li>
+                    <li>uvimbe</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5>INFORMATION</h5>
+                <ul class="list-unstyled">
+                    
+                    <li>About us</li>
+                    <li>Press room</li>
+                    
+                </ul>
+            </div>
+            <div class="col-md-3">
+                
+                <h5>SUPPORT</h5>
+                <ul class="list-unstyled">
+                    <li>FAQ</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5>SOCIAL MEDIA</h5>
+                <!-- Add your social media icons and links here -->
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Facebook</a></li>
+                    <li class="list-inline-item"><a href="#">Twitter</a></li>
+                    <li class="list-inline-item"><a href="#">Instagram</a></li>
+                    <!-- Add more social media icons as needed -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    
+</div>
+    
+<script src="{% static 'app/js/chart.js' %}"></script>       
+<script src="{% static 'app/js/chartist.js' %}"></script>       
+
+{% endblock %}

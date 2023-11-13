@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+{%block content%}
+
+<div class="container">
+    <!-- ======= Appointment Section ======= -->
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <br>
+          <div class="card-body">
+            
+          <div class="section-title">
+            <button class='btn btn-primary'>Taarifa zako za awali</button>
+            <h2>TOA TAARIFA SAHIHI ZA UGONJWA</h2>
+            </div>
+  
+          <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <input type="text" name="mtaa" class="form-control" placeholder="Mtaa uliopo kwa sasa" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <div class="validate"></div>
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0">
+                <input type="text" class="form-control" name="kata" placeholder="kata" data-rule="email" data-msg="Please enter a valid email">
+                <div class="validate"></div>
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0">
+                <input type="text" class="form-control" name="wilaya" placeholder="wilaya" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <div class="validate"></div>
+              </div>
+            </div>
+            
+  
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="maelezo" rows="5" placeholder="Andika tatizo linalokusibu"></textarea>
+              <div class="validate"></div>
+            </div>
+            <div class="text-center"><button type="submit" class="btn btn-primary">Toa taarifa sasa</button></div>
+          </form>
+  
+        </div>
+        </div>
+      </section><!-- End Appointment Section -->
+</div>
+{%endblock%}

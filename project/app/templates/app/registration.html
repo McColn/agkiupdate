@@ -1,0 +1,102 @@
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>AGKI HOSPITAL</title>
+  
+  <link rel="stylesheet" href="{% static 'app/vendors/iconfonts/font-awesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'app/vendors/css/vendor.bundle.base.css' %}">
+  <link rel="stylesheet" href="{% static 'app/vendors/css/vendor.bundle.addons.css' %}">
+ 
+  <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+ 
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth">
+        <div class="row w-100">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left p-5">
+              
+              <h4>Register page</h4>
+              <h6 class="font-weight-light">register to continue.</h6>
+              {% for message in messages %}
+            <div class = "alert alert-primary alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            </div>
+            {% endfor %}
+             
+
+              <form class="pt-3" method='POST'>
+                {% csrf_token %}
+                <!-- {{ form.as_p }} -->
+              <div class="form-group">
+                <label for="">first name</label>
+                <input type="text" name="first_name" class="form-control"   placeholder="firstame">
+              </div>
+              <div class="form-group">
+                <label for="">last name</label>
+                <input type="text" name="last_name" class="form-control"  placeholder="lastname">
+              </div>
+              <div class="form-group">
+                <label for="">Age</label>
+                <input type="number" name="age" class="form-control"  placeholder="age">
+              </div>
+              
+              <div class="form-group">
+                <label for="">Phone number</label>
+                <input type="text" name="phone" class="form-control"  placeholder="phone">
+              </div>
+              <div class="form-group">
+                <label for="">username</label>
+                <input type="text" name="username" class="form-control"  placeholder="username">
+              </div>
+              <div class="form-group">
+                <label for="">password</label>
+                <input type="password" name="password1" class="form-control"  placeholder="password">
+              </div>
+              <div class="form-group">
+                <label for="">conferm password</label>
+                <input type="password" name="password2" class="form-control"  placeholder="conferm password">
+              </div>
+              
+              <button type="submit" class="btn btn-primary w-100">Submit</button>
+              
+            </form>
+              <div class="text-center mt-4 font-weight-light">
+                Already registerd? <a href="{% url 'signin' %}" class="text-primary">Signin</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+            <script src="{% static 'app/vendors/js/vendor.bundle.base.js' %}"></script>
+          <script src="{% static 'app/vendors/js/vendor.bundle.addons.js' %}"></script>
+          <script src="{% static 'app/js/off-canvas.js' %}"></script>
+          <script src="{% static 'app/js/hoverable-collapse.js' %}"></script>
+          <script src="{% static 'app/js/misc.js' %}"></script>
+          <script src="{% static 'app/js/settings.js' %}"></script>
+          <script src="{% static 'app/js/todolist.js' %}"></script>
+          <script src="{% static 'app/js/dashboard.js' %}"></script>
+  <!-- endinject -->
+</body>
+
+
+<!-- Mirrored from www.urbanui.com/melody/template/pages/samples/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:53 GMT -->
+</html>
