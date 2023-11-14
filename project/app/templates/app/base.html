@@ -1,5 +1,6 @@
 {% load static %}
 
+{% load i18n %}
 
 
 
@@ -43,7 +44,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'home' %}">{% trans "Home" %} <span class="sr-only">(current)</span></a>
                     </li>
                     
                     {% if user.is_receptionist %}
@@ -77,25 +78,46 @@
                     
                     
                     {% if user.is_authenticated %}
+                    
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'department' %}">Department</a>
+                      <a class="nav-link" href="{% url 'signout' %}">{% trans "Signout" %}</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'signout' %}">Signout</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'profile' %}">welcome: {{user.username}}</a>
+                      <a class="nav-link" href="{% url 'profile' %}">{% trans "welcome" %}: {{user.username}}</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'signin' %}">Signin/up</a>
+                      <a class="nav-link" href="{% url 'signin' %}">{% trans "Signin/up" %}</a>
                     </li>
                     {% endif %}
                     {% if user.is_superuser %}
                     <li class="nav-item">
+                      <a class="nav-link" href="{% url 'department' %}">Department</a>
+                    </li>
+                    <li class="nav-item">
                       <a class="nav-link" href="/admin">Admin</a>
                     </li>
                     {% endif %}
+                    <li class="nav-item">
+                      <form class="form-inline" action="{% url 'set_language' %}" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="text" value="{{ redirect_to }}">
+                          <div class="input-group">
+                              <select class="custom-select" name="language" id="languageSelect">
+                                  {% get_available_languages as LANGUAGES %}
+                                  {% get_language_info_list for LANGUAGES as languages %}
+                                  {% for language in languages %}
+                                      <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                          {{ language.name_local }} ({{ language.code }})
+                                      </option>
+                                  {% endfor %}
+                              </select>
+                              <div class="input-group-append">
+                                  <button class="btn btn-outline-danger" type="submit">Go</button>
+                              </div>
+                          </div>
+                      </form>
+                  </li>
 
 
                     

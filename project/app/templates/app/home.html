@@ -1,6 +1,7 @@
 {% extends 'app/base.html' %}
 {% block content %}
 {% load static %}
+{% load i18n %}
 
 <style>
   /*--------------------------------------------------------------
@@ -312,12 +313,12 @@ footer {
   <div class="container">
     <div class="row d-flex align-items-center"">
     <div class=" col-lg-6 py-5 py-lg-0 order-2 order-lg-1" data-aos="fade-right">
-      <h1>AGKI Dispencary center</h1>
-      <h2>"Karibu! Pahali Penye Huruma na Uangalifu wa Kipekee."</h2>
+      <h1>{% trans "AGKI Dispencary center" %}</h1>
+      <h2>{% trans "Your health is our priority." %}</h2>
       {% if user.is_authenticated %}
-      <a href="{% url 'sickinfo' %}" class="btn-get-started scrollto">Toa taarifa ya ugonjwa</a>
+      <a href="{% url 'sickinfo' %}" class="btn-get-started scrollto">{% trans "report a disease" %}</a>
       {% else %}
-      <a href="{% url 'signin' %}" class="btn-get-started scrollto">Jisajili kutoa taarifa</a>
+      <a href="{% url 'signin' %}" class="btn-get-started scrollto">{% trans "Register to report a disease" %}</a>
       {% endif %}
     </div>
     <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
@@ -334,24 +335,24 @@ footer {
         <div class="col-md-4 mb-4">
             <div class="card service-card">
                 <div class="card-body">
-                    <h5 class="card-title">Uchunguzi wa Kawaida</h5>
-                    <p class="card-text">Uchunguzi wa afya wa kawaida na mashauriano na madaktari wenye uzoefu.</p>
+                    <h5 class="card-title">{% trans "Regular Checkup" %}</h5>
+                    <p class="card-text">{% trans "Routine health examination and consultations with experienced doctors." %}</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card service-card">
                 <div class="card-body">
-                    <h5 class="card-title">Matibabu Maalum</h5>
-                    <p class="card-text">Matibabu maalum na upasuaji na wataalamu wa matibabu walio mahiri.</p>
+                    <h5 class="card-title">{% trans "Specialized Therapy." %}</h5>
+                    <p class="card-text">{% trans "Specialized treatment and surgery with skilled medical experts." %}</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card service-card">
                 <div class="card-body">
-                    <h5 class="card-title">Huduma za Dharura</h5>
-                    <p class="card-text">Huduma za matibabu ya dharura 24/7 kwa huduma za matibabu ya haraka na muhimu.</p>
+                    <h5 class="card-title">{% trans "Emergency Services" %}</h5>
+                    <p class="card-text">{% trans "Emergency medical services 24/7 for prompt and essential medical care" %}</p>
                 </div>
             </div>
         </div>
@@ -464,7 +465,7 @@ footer {
       <div class="container">
 
         <div class="section-title">
-          <h2>Contact</h2>
+          <h2>{% trans "Contact" %}</h2>
            </div>
       </div>
 
@@ -479,19 +480,19 @@ footer {
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
+                <h4>{% trans "Location:" %}</h4>
                 <p>A108 kongowe</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
+                <h4>{% trans "Email:" %}</h4>
                 <p>info@agki.com</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
+                <h4>{% trans "Call:" %}</h4>
                 <p>+255 777 777 777</p>
               </div>
 
@@ -505,20 +506,20 @@ footer {
               {% csrf_token %}
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="jina" class="form-control" placeholder="Jina lako" required>
+                  <input type="text" name="jina" class="form-control" placeholder="{% trans 'Your full name' %}" required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="text" class="form-control" name="phone"  placeholder="Namba ya simu" required>
+                  <input type="text" class="form-control" name="phone"  placeholder="{% trans 'Your phone number' %}" required>
                 </div>
               </div>
               <!-- <div class="form-group mt-3">
                 <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
               </div> -->
               <div class="form-group mt-3">
-                <textarea class="form-control" name="ujumbe" rows="5" placeholder="ujumbe" required></textarea>
+                <textarea class="form-control" name="ujumbe" rows="5" placeholder="{% trans 'message content' %}" required></textarea>
               </div>
               
-              <div class="text-center"><button type="submit" class="btn btn-primary">Send Message</button></div>
+              <div class="text-center"><button type="submit" class="btn btn-primary">{% trans 'Send Message' %}</button></div>
             </form>
             <br>
 
@@ -556,7 +557,7 @@ footer {
     <div class="container py-5">
         <div class="row">
             <div class="col-md-3">
-                <h5>SERVICES</h5>
+                <h5>{% trans "SERVICES" %}</h5>
                 <ul class="list-unstyled">
                     <li>upasuaji</li>
                     <li>uzazi</li>
@@ -566,7 +567,7 @@ footer {
                 </ul>
             </div>
             <div class="col-md-3">
-                <h5>INFORMATION</h5>
+                <h5>{% trans "INFORMATION" %}</h5>
                 <ul class="list-unstyled">
                     
                     <li>About us</li>
@@ -576,14 +577,14 @@ footer {
             </div>
             <div class="col-md-3">
                 
-                <h5>SUPPORT</h5>
+                <h5>{% trans "SUPPORT" %}</h5>
                 <ul class="list-unstyled">
                     <li>FAQ</li>
                     <li>Contact</li>
                 </ul>
             </div>
             <div class="col-md-3">
-                <h5>SOCIAL MEDIA</h5>
+                <h5>{% trans "SOCIAL MEDIA" %}</h5>
                 <!-- Add your social media icons and links here -->
                 <ul class="list-inline">
                     <li class="list-inline-item"><a href="#">Facebook</a></li>

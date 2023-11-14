@@ -1,5 +1,6 @@
 {% extends 'app/base.html' %}
 {%block content%}
+{% load i18n %}
 
 <div class="container">
     <!-- ======= Appointment Section ======= -->
@@ -9,33 +10,33 @@
           <div class="card-body">
             
           <div class="section-title">
-            <button class='btn btn-primary'>Taarifa zako za awali</button>
-            <h2>TOA TAARIFA SAHIHI ZA UGONJWA</h2>
+            <button class='btn btn-primary'>{% trans "Your previous details" %}</button>
+            <h2>{% trans "Provide accurate disease information" %}</h2>
             </div>
   
           <form method="POST">
             {% csrf_token %}
             <div class="row">
               <div class="col-md-4 form-group">
-                <input type="text" name="mtaa" class="form-control" placeholder="Mtaa uliopo kwa sasa" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" name="mtaa" class="form-control" placeholder="{% trans 'Current street' %}" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
                 <div class="validate"></div>
               </div>
               <div class="col-md-4 form-group mt-3 mt-md-0">
-                <input type="text" class="form-control" name="kata" placeholder="kata" data-rule="email" data-msg="Please enter a valid email">
+                <input type="text" class="form-control" name="kata" placeholder="{% trans 'ward' %}" data-rule="email" data-msg="Please enter a valid email">
                 <div class="validate"></div>
               </div>
               <div class="col-md-4 form-group mt-3 mt-md-0">
-                <input type="text" class="form-control" name="wilaya" placeholder="wilaya" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" class="form-control" name="wilaya" placeholder="{% trans 'district' %}" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
                 <div class="validate"></div>
               </div>
             </div>
             
   
             <div class="form-group mt-3">
-              <textarea class="form-control" name="maelezo" rows="5" placeholder="Andika tatizo linalokusibu"></textarea>
+              <textarea class="form-control" name="maelezo" rows="5" placeholder="{% trans 'Write down the problem youre facing' %}"></textarea>
               <div class="validate"></div>
             </div>
-            <div class="text-center"><button type="submit" class="btn btn-primary">Toa taarifa sasa</button></div>
+            <div class="text-center"><button type="submit" class="btn btn-primary">{% trans "Report now" %}</button></div>
           </form>
   
         </div>

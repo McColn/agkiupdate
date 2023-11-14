@@ -2,6 +2,7 @@
 
 
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,8 +28,8 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left p-5">
               
-              <h4>Register page</h4>
-              <h6 class="font-weight-light">register to continue.</h6>
+              <h4>{% trans "Register page" %}</h4>
+              <h6 class="font-weight-light">{% trans "register to continue." %}</h6>
               {% for message in messages %}
             <div class = "alert alert-primary alert-dismissible fade show" role="alert">
                 {{message}}
@@ -41,40 +42,40 @@
                 {% csrf_token %}
                 <!-- {{ form.as_p }} -->
               <div class="form-group">
-                <label for="">first name</label>
-                <input type="text" name="first_name" class="form-control"   placeholder="firstame">
+                <label for="">{% trans "first name" %}</label>
+                <input type="text" name="first_name" class="form-control"   placeholder="{% trans 'firstame' %}">
               </div>
               <div class="form-group">
-                <label for="">last name</label>
-                <input type="text" name="last_name" class="form-control"  placeholder="lastname">
+                <label for="">{% trans "last name" %}</label>
+                <input type="text" name="last_name" class="form-control"  placeholder="{% trans 'lastname' %}">
               </div>
               <div class="form-group">
-                <label for="">Age</label>
-                <input type="number" name="age" class="form-control"  placeholder="age">
+                <label for="">{% trans "Age" %}</label>
+                <input type="number" name="age" class="form-control"  placeholder="{% trans 'age' %}">
               </div>
               
               <div class="form-group">
-                <label for="">Phone number</label>
-                <input type="text" name="phone" class="form-control"  placeholder="phone">
+                <label for="">{% trans "Phone number" %}</label>
+                <input type="text" name="phone" class="form-control"  placeholder="{% trans 'phone' %}">
               </div>
               <div class="form-group">
-                <label for="">username</label>
-                <input type="text" name="username" class="form-control"  placeholder="username">
+                <label for="">{% trans "username" %}</label>
+                <input type="text" name="username" class="form-control"  placeholder="{% trans 'username' %}">
               </div>
               <div class="form-group">
-                <label for="">password</label>
-                <input type="password" name="password1" class="form-control"  placeholder="password">
+                <label for="">{% trans "password" %}</label>
+                <input type="password" name="password1" class="form-control"  placeholder="{% trans 'password' %}">
               </div>
               <div class="form-group">
-                <label for="">conferm password</label>
-                <input type="password" name="password2" class="form-control"  placeholder="conferm password">
+                <label for="">{% trans "conferm password" %}</label>
+                <input type="password" name="password2" class="form-control"  placeholder="{% trans 'conferm password' %} ">
               </div>
               
-              <button type="submit" class="btn btn-primary w-100">Submit</button>
+              <button type="submit" class="btn btn-primary w-100">{% trans "Submit" %}</button>
               
             </form>
               <div class="text-center mt-4 font-weight-light">
-                Already registerd? <a href="{% url 'signin' %}" class="text-primary">Signin</a>
+                {% trans "Already registerd?" %}<a href="{% url 'signin' %}" class="text-primary">{% trans "Signin" %} </a>
               </div>
             </div>
           </div>

@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
+import os 
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,6 +49,7 @@ CRISPY_TEMPLATE_PACK='bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -114,7 +118,22 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+# Specify the languages supported by your website.
+LANGUAGES = [
+    ('en', _('English')),
+    ('sw', _('Swahili')),
+    # Add more languages as needed
+]
+
+# Set the default language for your website.
+# LANGUAGE_CODE = 'sw'
+
 USE_I18N = True
+
+# Set the path where Django will look for translation files.
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+] 
 
 USE_TZ = True
 
