@@ -48,7 +48,5 @@ urlpatterns = [
     path('delete_prescription/<int:prescription_id>/', views.delete_prescription, name='delete_prescription'),
     path('patient_count_per_period/', views.patient_count_per_period, name='patient_count_per_period'),
     path('total_cost_per_period/', views.total_cost_per_period, name='total_cost_per_period'),
-    
-    
-
+   
    ]

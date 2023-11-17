@@ -24,7 +24,9 @@
                         <th>wilaya </th>
                         <th>maelezo</th>
                         <th>mda</th>
+                        <th>category</th>
                         <th>hospital</th>
+                        <th>Selected Hospital</th>
                         <th>Action</th>
                         
 
@@ -40,7 +42,15 @@
                         <td>{{i.wilaya}}</td>
                         <td>{{i.maelezo}}</td>
                         <td>{{i.mda}}</td>
+                        <td>{{i.service}}</td>
                         <td>{{i.hospital}}</td>
+                        <td>
+                            {% if i.hospital_assigned %}
+                                {{ i.hospital.name }} <!-- Display the name of the selected hospital -->
+                            {% else %}
+                                No hospital selected
+                            {% endif %}
+                        </td>
                         <td><a href="{% url 'sickinfoEdit' i.pk %}">  select hospital</a></td>
                         
 

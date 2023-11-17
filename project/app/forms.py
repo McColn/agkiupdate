@@ -22,10 +22,10 @@ class UserEditForm(forms.ModelForm):
 
 
 class SickInfoForm(forms.ModelForm):
-    
+
     class Meta:
         model = SickInfoModel
-        fields = ['mtaa','kata','wilaya','maelezo','hospital']
+        fields = ['mtaa','kata','wilaya','maelezo','service','hospital']
 
 
 class SickInfoEditForm(forms.ModelForm):
@@ -36,10 +36,11 @@ class SickInfoEditForm(forms.ModelForm):
 
 
 class HospitalRegistrationForm(forms.ModelForm):
+    # service = forms.ModelChoiceField(queryset=HospitalServices.objects.all(), empty_label=None)
     
     class Meta:
         model = HospitalRegistrationModel
-        fields = ['name','level','location']
+        fields = ['name','level','region','district','ward','street']
 
 class HospitalEditForm(forms.ModelForm):
     

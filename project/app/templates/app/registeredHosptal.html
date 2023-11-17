@@ -24,7 +24,11 @@
                         
                         <th>hospital name</th>
                         <th>level</th>
-                        <th>location</th>
+                        <th>region</th>
+                        <th>district</th>
+                        <th>ward</th>
+                        <th>street</th>
+                        <th>System-selection</th>
                         <th>Action</th>
                         
                         
@@ -37,7 +41,11 @@
                         
                         <td>{{i.name}}</td>
                         <td>{{i.level}}</td>
-                        <td>{{i.location}}</td>
+                        <td>{{i.region}}</td>
+                        <td>{{i.district}}</td>
+                        <td>{{i.ward}}</td>
+                        <td>{{i.street}}</td>
+                        <td>{{i.street}}</td>
                         <td>
                             <a href='{% url 'hospitalEdit' i.id %}'><button class='btn btn-primary btn-sm'>Edit<i class="fa fa-edit ml-1"></i></button></a>
                             

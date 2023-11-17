@@ -157,11 +157,21 @@ def signout(request):
 
 @login_required
 def sickinfo(request):
+    
     # form = SickInfoForm()
     if request.method=='POST':
         form = SickInfoForm(request.POST)
         if form.is_valid():
             report = form.save(commit=False)
+
+            # Custom logic to suggest a nearby hospital
+            suggested_hospital = suggest_nearby_hospital(report)
+            
+            # If a suggested hospital is found, assign it to the report
+            if suggested_hospital:
+                report.hospital = suggested_hospital
+                report.hospital_assigned = True
+
             report.user=request.user
             report.save()
             return redirect('home')
@@ -173,6 +183,21 @@ def sickinfo(request):
          }
 
     return render(request,'app/sickinfo.html',context)
+
+from django.db.models import Q
+
+def suggest_nearby_hospital(report):
+    # Compare mtaa, street, kata, ward, wilaya, and district
+    hospitals = HospitalRegistrationModel.objects.filter(
+        Q(street__iexact=report.mtaa) |  # Compare mtaa to street
+        Q(ward__iexact=report.kata) |    # Compare kata to ward
+        Q(district__iexact=report.wilaya) ,  # Compare wilaya to district
+        Q(service__iexact=report.service)   # Compare wilaya to district
+
+    ).first()
+
+    return hospitals
+
 
 def sickinfoEdit(request,pk):
     s = SickInfoModel.objects.get(pk=pk)
@@ -189,6 +214,7 @@ def sickinfoEdit(request,pk):
          }
 
     return render(request,'app/sickinfoEdit.html',context)
+
 
 def sickinfolist(request):
     x = SickInfoModel.objects.all().order_by('-id')
@@ -212,6 +238,7 @@ def sickinfolistunprocesed(request):
     }
     return render(request,'app/sickinfolistunprocesed.html',context)
 def hospitalRegistration(request):
+    
     form = HospitalRegistrationForm()
     if request.method=='POST':
         form = HospitalRegistrationForm(request.POST)
@@ -220,7 +247,7 @@ def hospitalRegistration(request):
             messages.success(request,"you added hospital successfully")
             return redirect('hospitalRegistration')
     context = {
-            'form':form
+            'form':ModelForm
         }
     return render(request,'app/hospitalRegistration.html',context)
 
@@ -823,3 +850,5 @@ def total_cost_per_period(request):
 
     return render(request, 'app/total_cost_per_period.html', context)
     
+
+

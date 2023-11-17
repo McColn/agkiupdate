@@ -5,9 +5,8 @@ from django.db.models.base import Model
 from django.contrib.auth import get_user_model
 import random
 import string
+import geoip2.database
 
-
-# Create your models here.
 
 class Department(models.Model):
     name = models.CharField(max_length=20)
@@ -41,10 +40,17 @@ class CustomUser(AbstractUser):
 
 
 
+
 class HospitalRegistrationModel(models.Model):
     name = models.CharField(max_length=20)
     level = models.CharField(max_length=20)
-    location = models.CharField(max_length=20)
+    location = models.CharField(max_length=20,null=True,blank=True)
+    region = models.CharField(max_length=20,null=True,blank=True)
+    district = models.CharField(max_length=20,null=True,blank=True)
+    ward = models.CharField(max_length=20,null=True,blank=True)
+    street = models.CharField(max_length=20,null=True,blank=True)
+    service = models.CharField(max_length=20,null=True,blank=True)
+    registerd_time = models.DateTimeField(auto_now_add=True,null=True,blank=True)
 
     def __str__(self):
         return self.name
@@ -57,13 +63,13 @@ class SickInfoModel(models.Model):
     wilaya = models.CharField(max_length=30)
     maelezo = models.TextField(max_length=1000)
     mda = models.DateTimeField(auto_now_add=True)
+    service = models.CharField(max_length=20,null=True,blank=True)
     hospital = models.ForeignKey(HospitalRegistrationModel, on_delete=models.CASCADE,null=True,blank=True)
     hospital_assigned = models.BooleanField(default=False)
     
 
     def __str__(self):
         return self.user.username
-
 
 
 class ContactModel(models.Model):
@@ -96,8 +102,6 @@ class Medicine(models.Model):
 
         super().save(*args, **kwargs)
     
-    
-
     def __str__(self):
         return self.medicineName
 
@@ -121,9 +125,6 @@ class Patient(models.Model):
     def __str__(self):
         return self.fullname
 
-
-
-# prescriptions/models.py
 
 class Prescription(models.Model):
     medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE)
