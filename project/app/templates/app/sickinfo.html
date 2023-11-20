@@ -49,6 +49,25 @@
             </div>
             <div class="text-center"><button type="submit" class="btn btn-primary">{% trans "Report now" %}</button></div>
           </form>
+
+
+
+          {% if suggested_hospital %}
+          <div class="mt-4">
+            <div class="alert alert-fill-primary" role="alert">
+              <i class="fa fa-exclamation-triangle"></i>
+              {% trans "Suggested Hospital:" %} <b>{{ suggested_hospital.name }}</b>
+              <p>{% trans "Street:" %} {{ suggested_hospital.street }}</p>
+              <p>{% trans "Ward:" %} {{ suggested_hospital.ward }}</p>
+              <p>{% trans "District:" %} {{ suggested_hospital.district }}</p>
+            </div>
+             
+          </div>
+          {% else %}
+          <div class="mt-4">
+              <p>{% trans "No matching hospital found." %}</p>
+          </div>
+          {% endif %}
   
         </div>
         </div>

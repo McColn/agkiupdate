@@ -157,6 +157,7 @@ def signout(request):
 
 @login_required
 def sickinfo(request):
+    suggested_hospital = None  # Initialize suggested_hospital as None
     
     # form = SickInfoForm()
     if request.method=='POST':
@@ -174,12 +175,12 @@ def sickinfo(request):
 
             report.user=request.user
             report.save()
-            return redirect('home')
+            # return redirect('home')
     else:
         form = SickInfoForm()
 
     context = {
-            'form':form
+            'form':form, 'suggested_hospital':suggested_hospital,
          }
 
     return render(request,'app/sickinfo.html',context)

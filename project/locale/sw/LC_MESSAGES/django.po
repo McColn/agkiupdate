@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-13 22:09+0300\n"
+"POT-Creation-Date: 2023-11-20 12:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,8 +22,6 @@ msgid "Home"
 msgstr "Nyumbani"
 
 #: .\app\templates\app\base.html:83
-
-#| msgid "Signin"
 msgid "Signout"
 msgstr "Sajiliwa"
 
@@ -33,8 +30,6 @@ msgid "welcome"
 msgstr "karibu"
 
 #: .\app\templates\app\base.html:90
-
-#| msgid "Signin"
 msgid "Signin/up"
 msgstr "Sajiliwa"
 
@@ -101,8 +96,6 @@ msgid "Your full name"
 msgstr "Jina lako kamili"
 
 #: .\app\templates\app\home.html:512
-
-#| msgid "Phone number"
 msgid "Your phone number"
 msgstr "namba ya simu"
 
@@ -143,8 +136,6 @@ msgid "first name"
 msgstr "jina la kwanza"
 
 #: .\app\templates\app\registration.html:46
-
-#| msgid "first name"
 msgid "firstame"
 msgstr "jina la kwanza"
 
@@ -153,8 +144,6 @@ msgid "last name"
 msgstr "jina la ukoo"
 
 #: .\app\templates\app\registration.html:50
-
-#| msgid "last name"
 msgid "lastname"
 msgstr "jina la ukoo"
 
@@ -163,8 +152,6 @@ msgid "Age"
 msgstr "miaka"
 
 #: .\app\templates\app\registration.html:54
-
-#| msgid "Age"
 msgid "age"
 msgstr "miaka"
 
@@ -199,7 +186,7 @@ msgstr "Jisajili"
 msgid "Already registerd?"
 msgstr "Tayari umesajiliwa?"
 
-#: .\app\templates\app\registration.html:78 .\app\templates\app\signin.html:92
+#: .\app\templates\app\registration.html:78 .\app\templates\app\signin.html:68
 msgid "Signin"
 msgstr "Sajiliwa"
 
@@ -223,15 +210,35 @@ msgstr "kata"
 msgid "district"
 msgstr "wilaya"
 
-#: .\app\templates\app\sickinfo.html:36
-
-#| msgid "Write down the problem you"
+#: .\app\templates\app\sickinfo.html:47
 msgid "Write down the problem youre facing"
 msgstr "Andika tatizo linalokusibu"
 
-#: .\app\templates\app\sickinfo.html:39
+#: .\app\templates\app\sickinfo.html:50
 msgid "Report now"
 msgstr "Toa taarifa sasa"
+
+#: .\app\templates\app\sickinfo.html:59
+msgid "Suggested Hospital:"
+msgstr "Hospitali iliyopendekezwa"
+
+#: .\app\templates\app\sickinfo.html:60
+msgid "Street:"
+msgstr "Mtaa"
+
+#: .\app\templates\app\sickinfo.html:61
+msgid "Ward:"
+msgstr "Kata"
+
+#: .\app\templates\app\sickinfo.html:62
+#, fuzzy
+#| msgid "district"
+msgid "District:"
+msgstr "wilaya"
+
+#: .\app\templates\app\sickinfo.html:68
+msgid "No matching hospital found."
+msgstr "Hakuna hospitali kwa sasa"
 
 #: .\app\templates\app\signin.html:29
 msgid "AGKI Hospital"
@@ -245,45 +252,39 @@ msgstr "Habari! Tuanze."
 msgid "Sign in to continue."
 msgstr "Ingia ili kuendelea"
 
-#: .\app\templates\app\signin.html:38
-msgid "Badili lugha"
-msgstr "Change language"
-
-#: .\app\templates\app\signin.html:53
-msgid "Nenda"
-msgstr "Go"
-
-#: .\app\templates\app\signin.html:71
-
-#| msgid "username"
+#: .\app\templates\app\signin.html:47
 msgid "Username"
 msgstr "jina la utumiaji"
 
-#: .\app\templates\app\signin.html:74
-
-#| msgid "password"
+#: .\app\templates\app\signin.html:50
 msgid "Password"
 msgstr "nenosiri"
 
-#: .\app\templates\app\signin.html:77
+#: .\app\templates\app\signin.html:53
 msgid "check password"
 msgstr "angalia nenosiri"
 
-#: .\app\templates\app\signin.html:97
+#: .\app\templates\app\signin.html:73
 msgid "Don't have an account?"
 msgstr "Huna akaunti?"
 
-#: .\app\templates\app\signin.html:97
+#: .\app\templates\app\signin.html:73
 msgid "Create"
 msgstr "Tengeneza"
 
-#: .\project\settings.py:123
+#: .\project\settings.py:124
 msgid "English"
 msgstr ""
 
-#: .\project\settings.py:124
+#: .\project\settings.py:125
 msgid "Swahili"
 msgstr ""
+
+#~ msgid "Badili lugha"
+#~ msgstr "Change language"
+
+#~ msgid "Nenda"
+#~ msgstr "Go"
 
 #~ msgid "Change Language"
 #~ msgstr "Badili lugha"
